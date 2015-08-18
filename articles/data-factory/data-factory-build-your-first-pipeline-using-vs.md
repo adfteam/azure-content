@@ -115,7 +115,7 @@ Now, you will create a linked service for an on-demand HDInsight cluster that wi
 		        "clusterSize": 1,
 		        "timeToLive": "00:05:00",
 		        "jobsContainer": "adfjobs",
-		        "linkedServiceName": "StorageLinkedService",
+		        "linkedServiceName": "AzureStorageLinkedService1",
 		        "type": "HDInsightOnDemandLinkedService"
 		    }
 		}
@@ -149,7 +149,7 @@ Now, you will create the output dataset to represent the data stored in the Azur
 		                "type": "TextFormat",
 		                "columnDelimiter": ","
 		            },
-		            "linkedServiceName": "StorageLinkedService"
+		            "linkedServiceName": "AzureStorageLinkedService1"
 		        },
 		        "availability": {
 		            "frequency": "Month",
@@ -177,7 +177,7 @@ In this step, you will create your first pipeline.
 		            "type": "HDInsightActivity",
 		            "transformation": {
 		                    "scriptPath": "script/partitionweblogs.hql",
-		                    "scriptLinkedService": "StorageLinkedService",
+		                    "scriptLinkedService": "AzureStorageLinkedService1",
 		                    "type": "Hive",
 		                    "extendedProperties": {
 		                        "partitionedtable": "wasb://data@<storageaccountname>.blob.core.windows.net/partitioneddata"
@@ -199,7 +199,7 @@ In this step, you will create your first pipeline.
  
 	In the JSON snippet, you are creating a pipeline that consists of a single activity that uses Hive to process Data on an HDInsight cluster.
 	
-	The Hive script file, **partitionweblogs.hql**, is stored in the Azure storage account (specified by the scriptLinkedService, called **StorageLinkedService**), and in a container called **script**.
+	The Hive script file, **partitionweblogs.hql**, is stored in the Azure storage account (specified by the scriptLinkedService, called **AzureStorageLinkedService1**), and in a container called **script**.
 
 	The **extendedProperties** section is used to specify the runtime settings that will be passed to the hive script as Hive configuration values (e.g ${hiveconf:PartitionedData}).
 
